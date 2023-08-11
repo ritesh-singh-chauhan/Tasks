@@ -14,8 +14,9 @@ class TaskPipeline:
 class MongoDBPipeline:
     collection_name     = "france_america"
     def __init__(self, mongo_uri, mongo_db):
-        self.mongo_uri  = mongo_uri
-        self.mongo_db   = mongo_db
+        self.client     =   MongoClient(mongo_uri)
+        self.db         =   self.client[mongo_db]
+        self.collection =   self.db[self.collection_name]
         
     @classmethod
     def from_crawler(cls, crawler):
@@ -24,9 +25,7 @@ class MongoDBPipeline:
             mongo_db  = crawler.settings.get('MONGO_DATABASE')
         )
     def open_spider(self, spider):
-        self.client     =   MongoClient(self.mongo_uri)
-        self.db         =   self.client[self.mongo_db]
-        self.collection =   self.db[self.collection_name]
+        pass
 
     def process_item(self, item, spider):
         if isinstance(item,TaskItem):

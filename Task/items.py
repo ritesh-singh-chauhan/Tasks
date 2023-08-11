@@ -16,9 +16,8 @@ class TaskItem(scrapy.Item):
     content     =   scrapy.Field()
     media       =   scrapy.Field()
     updated_at  =   scrapy.Field()
-    pass
+    
 
 class FullDescription(scrapy.Item):
     link_hash       =   scrapy.Field()
     fulldescription =   scrapy.Field()
-    pass
