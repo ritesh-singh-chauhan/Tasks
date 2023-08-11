@@ -4,10 +4,10 @@ class CentralSql:
     def Connection():
     
         mycon = sqltor.connect(
-            host=DB_SETTINGS["HOST"], 
-            user=DB_SETTINGS["USER"], 
-            passwd=DB_SETTINGS["PASSWORD"], 
-            database=DB_SETTINGS["DATABASE"]
+            host    =   DB_SETTINGS["HOST"], 
+            user    =   DB_SETTINGS["USER"], 
+            passwd  =   DB_SETTINGS["PASSWORD"], 
+            database=   DB_SETTINGS["DATABASE"]
         )
         
         if mycon.is_connected():

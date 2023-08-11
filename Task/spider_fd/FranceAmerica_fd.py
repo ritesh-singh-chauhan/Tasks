@@ -9,17 +9,21 @@ class FranceAmerica_fd(Centralfd):
     name="franceamerica_fd"
     
     def parse(self,response):
-        item=FullDescription()
+        item    =   FullDescription()
         response.selector.remove_namespaces()
-        st=remove_tags("\n".join(response.xpath("//div[@class='elementor-section-wrap']//h2 | //div[@class='elementor-section-wrap']//p").getall()))
-        link=self.url
-        result=hashlib.md5(link.encode())
+        st      =   remove_tags("\n".join(response.xpath("//div[@class='elementor-section-wrap']//h2 | //div[@class='elementor-section-wrap']//p").getall()))
+        result  =   hashlib.md5(self.url.encode())
+
         try:
-            item['link_hash']=result.hexdigest()
+            item['link_hash']       =   result.hexdigest()
+
         except:
-            item['link_hash']=''
+            item['link_hash']       =   ''
+
         try:
-            item['fulldescription']=html.unescape(st)
+            item['fulldescription'] =   html.unescape(st)
+
         except:
-            item['fulldescription']=""
+            item['fulldescription'] =   ""
+            
         yield item

@@ -6,12 +6,18 @@ from Task.settings import REDIS_SETTINGS,logging
 class ScrapingServices:
 
     def UsingRedis(self):
-        mycon= CentralSql.Connection()
+
+        mycon   =   CentralSql.Connection()
+
         try:
-            cursor=mycon.cursor()
+            cursor  =   mycon.cursor()
             cursor.execute("SELECT Domain.name, Source.source, Source.statuss FROM Source, Domain where Source.domain_id=Domain.id and Domain.id>5") #source status must be 1 to crawl spider
-            Datasql= cursor.fetchall()
-            redis_conn = Redis(host=REDIS_SETTINGS["redis_host"], port=REDIS_SETTINGS["redis_port"], db=REDIS_SETTINGS["redis_db"]) #using default db=0
+            Datasql =   cursor.fetchall()
+            redis_conn = Redis(
+                host    =   REDIS_SETTINGS["REDIS_HOST"], 
+                port    =   REDIS_SETTINGS["REDIS_PORT"], 
+                db      =   REDIS_SETTINGS["REDIS_DB"]
+            ) #using default db=0
             try:
                 redis_conn.ping()
                 logging.info('Redis connected Successfully')

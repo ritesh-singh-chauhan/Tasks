@@ -11,16 +11,16 @@ DB_SETTINGS={
 }
 
 REDIS_SETTINGS={
-    "redis_host":os.getenv("redis_host","localhost"),
-    "redis_port":int(os.getenv("redis_port",6379)),
-    "redis_db":int(os.getenv("redis_db",1))
+    "REDIS_HOST"    :   os.getenv("REDIS_HOST","localhost"),
+    "REDIS_PORT"    :   int(os.getenv("REDIS_PORT",6379)),
+    "REDIS_DB"      :   int(os.getenv("REDIS_DB",1))
 }
 
 ITEM_PIPELINES = {
     'Task.pipelines.MongoDBPipeline': 900, 
 }
-MONGO_URI = os.getenv("MONGO_URI")
-MONGO_DATABASE = os.getenv("MONGO_DATABASE","Trial") 
+MONGO_URI       =   os.getenv("MONGO_URI")
+MONGO_DATABASE  =   os.getenv("MONGO_DATABASE","Trial") 
 
 
 # Scrapy settings for Task project
