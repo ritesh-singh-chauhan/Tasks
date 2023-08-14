@@ -4,10 +4,11 @@ import logging
 logging.basicConfig(filename='/home/ritesh/projects/testprojects/ScrapyLocalHost/Task/Mylog.txt',level=logging.INFO)
 load_dotenv('.env')
 DB_SETTINGS={
-    "DATABASE":os.getenv("DATABASE","data_spider"),
-    "HOST":os.getenv("HOST","127.0.0.1"),
-    "USER":os.getenv("USER","ritesh"),
-    "PASSWORD":os.getenv("PASSWORD","test")
+    "DATABASE"  :   os.getenv("DATABASE","Spider_data"),
+    "HOST"      :   os.getenv("HOST","127.0.0.1"),
+    "USER"      :   os.getenv("USER","root"),
+    "PASSWORD"  :   os.getenv("PASSWORD","test"),
+    "PORT"      :   int(os.getenv("PORT",3306))
 }
 
 REDIS_SETTINGS={

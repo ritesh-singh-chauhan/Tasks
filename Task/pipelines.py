@@ -2,9 +2,9 @@ from itemadapter import ItemAdapter
 from pymongo import MongoClient
 from ProcessCrawler import *
 from Task.items import TaskItem,FullDescription
-from CentralSql import CentralSql
+from CentralSql import CentralSql,text
 d={}
-mycon=CentralSql.Connection()
+obj=CentralSql()
 
 class TaskPipeline:
     def process_item(self, item, spider):
@@ -34,18 +34,23 @@ class MongoDBPipeline:
             try:
 
                 if spider.name not in d.keys():
-                    cursor      =   mycon.cursor()
-                    cursor.execute(f"SELECT Domain.fdstatus FROM Source,Domain where Source.domain_id=Domain.id and Domain.name='{spider.name}'")
-                    fdstatus    =   cursor.fetchall()
+                    session=obj.connect()
+                    query = text(f"SELECT Domain.fdstatus FROM Source,Domain where Source.domain_id=Domain.id and Domain.name='{spider.name}'")
+                    result = session.execute(query)
+                    fdstatus=result.fetchall()
                     d[spider.name]=fdstatus[0][0]
+                    session.close()
                     logging.info("Status of the FD",fdstatus)
 
                 if d[spider.name]==1:
                     processObj=ProcessCrawler()
-                    processObj.feed_fd(spider_fd,link)                    
+                    processObj.feed_fd(spider_fd,link) 
+                                       
             except Exception as error:
                 logging.error(f"Error Found in SQL Query pipeline:{error}")
-
+            
+            finally:
+                session.close()
 
             self.collection.insert_one(item)
         if isinstance(item,FullDescription):
