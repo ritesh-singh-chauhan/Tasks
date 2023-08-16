@@ -1,3 +1,4 @@
 .env
 /Mylog.txt
 *.pyc
+*.log
