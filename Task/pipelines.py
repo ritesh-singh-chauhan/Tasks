@@ -2,7 +2,7 @@ from itemadapter import ItemAdapter
 from pymongo import MongoClient
 from ProcessCrawler import *
 from Task.items import TaskItem,FullDescription
-from CentralSql import CentralSql,text
+from CentralSql import CentralSql,Domain,Source
 d={}
 obj=CentralSql()
 
@@ -28,31 +28,29 @@ class MongoDBPipeline:
         pass
 
     def process_item(self, item, spider):
+        logging.info("Step-VIII")
         if isinstance(item,TaskItem):
             link        =   item['link']
-            spider_fd   =   spider.name+"_fd"   #-------------------TO dynamically give the name of spider of the full description----------           
+            spider_fd   =   spider.name+"_fd"   
             try:
 
                 if spider.name not in d.keys():
-                    session=obj.connect()
-                    query = text(f"SELECT Domain.fdstatus FROM Source,Domain where Source.domain_id=Domain.id and Domain.name='{spider.name}'")
-                    result = session.execute(query)
-                    fdstatus=result.fetchall()
-                    d[spider.name]=fdstatus[0][0]
+                    session     =    obj.connect()    
+                    query       =   session.query(Domain.fdstatus).join(Source, Source.domain_id == Domain.id).filter( Domain.name == spider.name )
+    
+                    fdstatus    =   query.all()
+                    d[spider.name]= fdstatus[0][0]
                     session.close()
                     logging.info("Status of the FD",fdstatus)
 
-                if d[spider.name]==1:
-                    processObj=ProcessCrawler()
+                if d[spider.name]   ==  1:
+                    processObj  =   ProcessCrawler()
                     processObj.feed_fd(spider_fd,link) 
                                        
             except Exception as error:
                 logging.error(f"Error Found in SQL Query pipeline:{error}")
             
-            finally:
-                session.close()
-
-            self.collection.insert_one(item)
+            self.collection.insert_one(dict(item))
         if isinstance(item,FullDescription):
             self.collection.update_one({"link_hash":item['link_hash']},{"$set":{"Full_Description":item['fulldescription']}})
         return item

@@ -1,9 +1,13 @@
 from ProcessCrawler import *
 from redis import Redis
 from rq import Queue
-from CentralSql import CentralSql,text
+from CentralSql import CentralSql,Source,Domain
 from Task.settings import REDIS_SETTINGS,logging
+
+
 obj=CentralSql()
+
+
 class ScrapingServices:
 
     def __init__(self):
@@ -12,9 +16,12 @@ class ScrapingServices:
     def UsingRedis(self):
         try:
             print(self.session)
-            query = text("SELECT Domain.name, Source.source, Source.statuss FROM Source, Domain where Source.domain_id=Domain.id and Domain.id>5")
-            result = self.session.execute(query)
-            rows = result.fetchall()
+            
+            query = self.session.query(Domain.name, Source.source, Source.statuss)\
+               .join(Source, Source.domain_id == Domain.id)\
+               .filter(Domain.id > 5)
+            
+            rows = query.all()
     
             for row in rows:
                 print(row)
@@ -46,3 +53,6 @@ class ScrapingServices:
 
 obj_scraping=ScrapingServices()
 obj_scraping.UsingRedis()
+
+
+

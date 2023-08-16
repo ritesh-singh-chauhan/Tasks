@@ -7,17 +7,12 @@ import scrapy
 
 
 class TaskItem(scrapy.Item):
-    title       =   scrapy.Field()
-    link        =   scrapy.Field()
-    link_hash   =   scrapy.Field()
-    description =   scrapy.Field()
-    pubDate     =   scrapy.Field()
-    creator     =   scrapy.Field()
-    content     =   scrapy.Field()
-    media       =   scrapy.Field()
-    updated_at  =   scrapy.Field()
-    
+    title       =   scrapy.Field(type=str)
+    link        =   scrapy.Field(type=str)
+    link_hash   =   scrapy.Field(type=str)
+    description =   scrapy.Field(type=str)
+    pubDate     =   scrapy.Field(type=str)
 
 class FullDescription(scrapy.Item):
-    link_hash       =   scrapy.Field()
-    fulldescription =   scrapy.Field()
+    link_hash       =   scrapy.Field(type=str)
+    fulldescription =   scrapy.Field(type=str)

@@ -1,9 +1,9 @@
 import os
 from dotenv import load_dotenv
 import logging
-logging.basicConfig(filename='/home/ritesh/projects/testprojects/ScrapyLocalHost/Task/Mylog.txt',level=logging.INFO)
+logging.basicConfig(filename='/home/ritesh/projects/testprojects/ScrapyLocalHost/Task/Mylog.txt',level=logging.DEBUG)
 load_dotenv('.env')
-DB_SETTINGS={
+DB_SETTINGS = {
     "DATABASE"  :   os.getenv("DATABASE","Spider_data"),
     "HOST"      :   os.getenv("HOST","127.0.0.1"),
     "USER"      :   os.getenv("USER","root"),
@@ -11,7 +11,7 @@ DB_SETTINGS={
     "PORT"      :   int(os.getenv("PORT",3306))
 }
 
-REDIS_SETTINGS={
+REDIS_SETTINGS = {
     "REDIS_HOST"    :   os.getenv("REDIS_HOST","localhost"),
     "REDIS_PORT"    :   int(os.getenv("REDIS_PORT",6379)),
     "REDIS_DB"      :   int(os.getenv("REDIS_DB",1))

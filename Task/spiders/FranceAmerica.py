@@ -3,14 +3,16 @@ import hashlib
 from w3lib.html import remove_tags
 from Task.spiders.Central import Central
 from Task.items import TaskItem
-
+from Task.settings import logging
 class FranceAmerica(Central):
 
     name="franceamerica"
 
     def parse(self,response):
+        logging.info("Step-V")
         item=TaskItem()
         response.selector.remove_namespaces()
+        
         for data in response.xpath("//item"):
             try:
                 item['title']       =   data.xpath("title/text()").get()
@@ -36,4 +38,5 @@ class FranceAmerica(Central):
                 item['pubDate']     =   ''
                 
             if item['title']!=''    and     item['link']!=''    and    item['pubDate']!='': 
+                logging.info("Step-VI")
                 yield item

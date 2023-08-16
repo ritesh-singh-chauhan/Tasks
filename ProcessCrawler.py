@@ -7,6 +7,7 @@ class ProcessCrawler:
 
     def feeds(self,spidername,sourcelink):
         self.process =  CrawlerProcess(get_project_settings())
+        logging.info("Step-I")
         self.process.crawl(spidername,sourcelink)
         self.process.start()
     
@@ -15,6 +16,7 @@ class ProcessCrawler:
 
         try:
             process =   CrawlerProcess(get_project_settings())
+            logging.info("STEP-I")
             process.crawl(spider_fd,self.url)
             process.start()
 

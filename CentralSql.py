@@ -1,9 +1,28 @@
-import mysql.connector as sqltor
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.ext.declarative import declarative_base
 from Task.settings import DB_SETTINGS, logging
-from sqlalchemy import text
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
+
+
+class Domain(Base):
+
+    __tablename__ = 'Domain'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    fdstatus=Column(String)
+class Source(Base):
+
+    __tablename__ = 'Source'
+
+    id = Column(Integer, primary_key=True)
+    source = Column(String)
+    statuss = Column(String)
+    domain_id = Column(Integer, ForeignKey('domain.id'))
+
 
 
 class CentralSql:
@@ -15,24 +34,14 @@ class CentralSql:
 
     def connect(self):
         try:
-            self.connection = sqltor.connect(
-                host=DB_SETTINGS["HOST"], 
-                user=DB_SETTINGS["USER"], 
-                passwd=DB_SETTINGS["PASSWORD"], 
-                database=DB_SETTINGS["DATABASE"],
-                port=DB_SETTINGS["PORT"]
-            )
-            if self.connection.is_connected():
-                print("MySQL is connected")
-                self.engine = create_engine(self.get_database_url())
-                self.Session = sessionmaker(bind=self.engine)
-                return self.Session()
-            else:
-                logging.error("MySQL not connected in Central")
-            
+
+            logging.info("MySQL is connected")
+            self.engine = create_engine(self.get_database_url())
+            self.Session = sessionmaker(bind=self.engine)
+            return self.Session()
         
         except Exception as e:
-            logging.error("Error while connecting to MySQL:", str(e))
+            logging.error("Error while connecting to MySQLAlchemy:", str(e))
 
     def get_database_url(self):
         return f"mysql+mysqlconnector://{DB_SETTINGS['USER']}:{DB_SETTINGS['PASSWORD']}@{DB_SETTINGS['HOST']}:{DB_SETTINGS['PORT']}/{DB_SETTINGS['DATABASE']}"
