@@ -10,7 +10,7 @@ class FranceAmerica_fd(Centralfd):
     name="franceamerica_fd"
 
     def parse(self,response):
-        logging.info("Step-V of full desription")
+        
         item    =   FullDescription()
         response.selector.remove_namespaces()
         st      =   remove_tags("\n".join(response.xpath("//div[@class='elementor-section-wrap']//h2 | //div[@class='elementor-section-wrap']//p").getall()))
@@ -28,6 +28,5 @@ class FranceAmerica_fd(Centralfd):
         except:
             item['fulldescription'] =   ""
 
-        logging.info("Step-VI of full description")
-        
+
         yield item

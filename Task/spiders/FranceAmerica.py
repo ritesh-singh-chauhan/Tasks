@@ -12,7 +12,7 @@ class FranceAmerica(Central):
         logging.info("Step-V")
         item=TaskItem()
         response.selector.remove_namespaces()
-        
+
         for data in response.xpath("//item"):
             try:
                 item['title']       =   data.xpath("title/text()").get()
@@ -37,6 +37,5 @@ class FranceAmerica(Central):
             except:
                 item['pubDate']     =   ''
                 
-            if item['title']!=''    and     item['link']!=''    and    item['pubDate']!='': 
-                logging.info("Step-VI")
+            if item['title'] != ''    and     item['link'] != ''    and    item['pubDate'] != '': 
                 yield item
