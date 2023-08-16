@@ -5,7 +5,7 @@ from CentralSql import CentralSql,Source,Domain
 from Task.settings import REDIS_SETTINGS,logging
 
 
-obj=CentralSql()
+obj = CentralSql()
 
 
 class ScrapingServices:
