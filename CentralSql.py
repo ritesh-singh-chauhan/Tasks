@@ -17,6 +17,7 @@ class Domain(Base):
 class Source(Base):
 
     __tablename__ = 'Source'
+    
     id        = Column(Integer, primary_key=True)
     source    = Column(String)
     statuss   = Column(String)
