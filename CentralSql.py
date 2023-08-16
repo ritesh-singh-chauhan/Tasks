@@ -11,15 +11,15 @@ class Domain(Base):
 
     __tablename__ = 'Domain'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    fdstatus=Column(String)
+    id      = Column(Integer, primary_key=True)
+    name    = Column(String)
+    fdstatus= Column(String)
 class Source(Base):
 
     __tablename__ = 'Source'
-    id = Column(Integer, primary_key=True)
-    source = Column(String)
-    statuss = Column(String)
+    id        = Column(Integer, primary_key=True)
+    source    = Column(String)
+    statuss   = Column(String)
     domain_id = Column(Integer, ForeignKey('domain.id'))
 
 
@@ -27,14 +27,14 @@ class Source(Base):
 class CentralSql:
     def __init__(self):
         self.connection = None
-        self.engine = None
-        self.Session = None
-        self.session = None
+        self.engine     = None
+        self.Session    = None
+        self.session    = None
 
     def connect(self):
         try:
 
-            self.engine = create_engine(self.get_database_url())
+            self.engine  = create_engine(self.get_database_url())
             self.Session = sessionmaker(bind=self.engine)
             logging.info("MySQL is connected")
             return self.Session()
