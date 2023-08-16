@@ -1,27 +1,29 @@
-import os
+
 from dotenv import load_dotenv
+from os import getenv
 import logging
-logging.basicConfig(filename='/home/ritesh/projects/testprojects/ScrapyLocalHost/Task/Mylog.txt',level=logging.DEBUG)
+
+logging.basicConfig(filename="/home/ritesh/projects/testprojects/ScrapyLocalHost/Task/Mylog.log",level=logging.INFO)
 load_dotenv('.env')
 DB_SETTINGS = {
-    "DATABASE"  :   os.getenv("DATABASE","Spider_data"),
-    "HOST"      :   os.getenv("HOST","127.0.0.1"),
-    "USER"      :   os.getenv("USER","root"),
-    "PASSWORD"  :   os.getenv("PASSWORD","test"),
-    "PORT"      :   int(os.getenv("PORT",3306))
+    "DATABASE"  :   getenv("DATABASE","Spider_data"),
+    "HOST"      :   getenv("HOST","127.0.0.1"),
+    "USER"      :   getenv("USER","root"),
+    "PASSWORD"  :   getenv("PASSWORD","test"),
+    "PORT"      :   int(getenv("PORT",3306))
 }
 
 REDIS_SETTINGS = {
-    "REDIS_HOST"    :   os.getenv("REDIS_HOST","localhost"),
-    "REDIS_PORT"    :   int(os.getenv("REDIS_PORT",6379)),
-    "REDIS_DB"      :   int(os.getenv("REDIS_DB",1))
+    "REDIS_HOST"    :   getenv("REDIS_HOST","localhost"),
+    "REDIS_PORT"    :   int(getenv("REDIS_PORT",6379)),
+    "REDIS_DB"      :   int(getenv("REDIS_DB",1))
 }
 
 ITEM_PIPELINES = {
     'Task.pipelines.MongoDBPipeline': 900, 
 }
-MONGO_URI       =   os.getenv("MONGO_URI")
-MONGO_DATABASE  =   os.getenv("MONGO_DATABASE","Trial") 
+MONGO_URI       =   getenv("MONGO_URI")
+MONGO_DATABASE  =   getenv("MONGO_DATABASE","Trial") 
 
 
 # Scrapy settings for Task project

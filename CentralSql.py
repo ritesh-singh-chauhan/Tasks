@@ -17,7 +17,6 @@ class Domain(Base):
 class Source(Base):
 
     __tablename__ = 'Source'
-
     id = Column(Integer, primary_key=True)
     source = Column(String)
     statuss = Column(String)
@@ -35,12 +34,13 @@ class CentralSql:
     def connect(self):
         try:
 
-            logging.info("MySQL is connected")
             self.engine = create_engine(self.get_database_url())
             self.Session = sessionmaker(bind=self.engine)
+            logging.info("MySQL is connected")
             return self.Session()
         
         except Exception as e:
+
             logging.error("Error while connecting to MySQLAlchemy:", str(e))
 
     def get_database_url(self):
