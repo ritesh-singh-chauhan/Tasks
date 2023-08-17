@@ -1,3 +1,11 @@
+# import os
+# import sys
+# from pathlib import Path
+# central=Path(__file__).resolve()
+# processcrawler=os.path.join(central.parent,"Task/pipelines")
+# print(sys.path)
+# sys.path.insert(0,str(processcrawler))
+# print(sys.path)
 from ProcessCrawler import *
 from redis import Redis
 from rq import Queue
@@ -50,7 +58,6 @@ class ScrapingServices:
 
         finally:
             self.session.close()
-
 obj_scraping=ScrapingServices()
 obj_scraping.UsingRedis()
 

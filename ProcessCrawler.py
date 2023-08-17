@@ -5,19 +5,18 @@ from Task.settings import logging
 
 class ProcessCrawler:
 
-    def feeds(self,spidername,sourcelink):
+    def __init__(self):
         self.process =  CrawlerProcess(get_project_settings())
+
+    def feeds(self,spidername,sourcelink):
         self.process.crawl(spidername,sourcelink)
         self.process.start()
     
     def feed_fd(self,spider_fd,url):
-        self.spider_fd=spider_fd
-        self.url    =   url
 
         try:
-            process =   CrawlerProcess(get_project_settings())
-            process.crawl(self.spider_fd,self.url)
-            process.start()
+            self.process.crawl(spider_fd,url)
+            self.process.start()
 
         except Exception as error:
             logging.error(f"Error found in full description :{error}")
