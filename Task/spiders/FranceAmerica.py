@@ -7,7 +7,7 @@ from Task.settings import logging,CUSTOM_CURRENT_TIME
 
 class FranceAmerica(Central):
 
-    logging.info(f"Step-1 done by engine spider opened: {CUSTOM_CURRENT_TIME}")
+
     name="franceamerica"
 
     def parse(self,response):
