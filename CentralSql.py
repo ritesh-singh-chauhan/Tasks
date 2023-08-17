@@ -9,14 +9,14 @@ Base = declarative_base()
 
 class Domain(Base):
 
-    __tablename__ = 'Domain'
+    __tablename__ = 'domain'
 
     id      = Column(Integer, primary_key=True)
     name    = Column(String)
     fdstatus= Column(String)
 class Source(Base):
 
-    __tablename__ = 'Source'
+    __tablename__ = 'source'
     
     id        = Column(Integer, primary_key=True)
     source    = Column(String)
