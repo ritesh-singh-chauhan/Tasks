@@ -2,7 +2,7 @@ from ProcessCrawler import *
 from redis import Redis
 from rq import Queue
 from CentralSql import CentralSql,Source,Domain
-from Task.settings import REDIS_SETTINGS,logging
+from Task.settings import REDIS_SETTINGS,logging,CUSTOM_CURRENT_TIME 
 # import os
 # import sys
 # from pathlib import Path
@@ -21,7 +21,7 @@ class ScrapingServices:
 
     def UsingRedis(self):
         try:
-            
+            logging.info(CUSTOM_CURRENT_TIME)
             query = self.session.query(Domain.name, Source.source, Source.statuss)\
                .join(Source, Source.domain_id == Domain.id)\
                .filter(Domain.id > 5)
