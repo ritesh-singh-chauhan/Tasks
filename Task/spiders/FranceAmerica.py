@@ -3,7 +3,6 @@ import hashlib
 from w3lib.html import remove_tags
 from Task.spiders.Central import Central
 from Task.items import TaskItem
-from Task.settings import logging,CUSTOM_CURRENT_TIME
 
 class FranceAmerica(Central):
 

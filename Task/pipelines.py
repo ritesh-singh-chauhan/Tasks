@@ -53,7 +53,7 @@ class MongoDBPipeline:
             self.collection.insert_one(dict(item))
         if isinstance(item,FullDescription):
             self.collection.update_one({"link_hash":item['link_hash']},{"$set":{"Full_Description":item['fulldescription']}})
-        return item
+        #return item 
         
     def close_spider(self, spider):
         self.client.close()
