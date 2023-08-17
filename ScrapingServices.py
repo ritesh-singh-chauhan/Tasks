@@ -21,7 +21,6 @@ class ScrapingServices:
 
     def UsingRedis(self):
         try:
-            print(self.session)
             
             query = self.session.query(Domain.name, Source.source, Source.statuss)\
                .join(Source, Source.domain_id == Domain.id)\
