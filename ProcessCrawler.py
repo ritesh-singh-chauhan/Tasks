@@ -19,4 +19,4 @@ class ProcessCrawler:
             self.process.start()
 
         except Exception as error:
-            logging.error(f"Error found in full description :{error}")
+            logging.error(f"Error found in full description from ProcessCrawler:{error}")

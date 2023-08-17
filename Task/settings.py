@@ -2,6 +2,10 @@
 from dotenv import load_dotenv
 from os import getenv
 import logging
+import datetime
+
+# Set a custom value for current time
+CUSTOM_CURRENT_TIME = datetime.datetime.now()
 
 logging.basicConfig(filename="./Mylog.log",level=logging.INFO)
 load_dotenv('.env')
