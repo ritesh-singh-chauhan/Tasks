@@ -17,25 +17,25 @@ class FranceAmerica(Central):
             try:
                 item['title']       =   data.xpath("title/text()").get()
             except:
-                item['title']       =   ''
+                item['title']       =   None
             try:
                 link=data.xpath("link/text()").get()
                 item['link']        =   link
             except:
-                item['link']        =   ''
+                item['link']        =   None
             try:
                 result              =   hashlib.md5(link.encode())
                 item['link_hash']   =   result.hexdigest()
             except:
-                item['link_hash']   =   ''
+                item['link_hash']   =   None
             try:
                 item['description'] =   html.unescape(remove_tags(data.xpath("description/text()").get()))
             except:
-                item['description'] =   ''
+                item['description'] =   None
             try:
                 item['pubDate']     =   data.xpath("pubDate/text()").get()
             except:
-                item['pubDate']     =   ''
+                item['pubDate']     =   None
                 
-            if item['title'] != ''    and     item['link'] != ''    and    item['pubDate'] != '': 
+            if item['title'] != None    and     item['link'] != None    and    item['pubDate'] != None: 
                 yield item

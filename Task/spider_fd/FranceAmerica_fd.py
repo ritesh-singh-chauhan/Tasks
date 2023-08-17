@@ -21,13 +21,13 @@ class FranceAmerica_fd(Centralfd):
             item['link_hash']       =   result.hexdigest()
 
         except:
-            item['link_hash']       =   ''
+            item['link_hash']       =   None
 
         try:
             item['fulldescription'] =   html.unescape(st)
 
         except:
-            item['fulldescription'] =   ""
+            item['fulldescription'] =   None 
 
 
         yield item
