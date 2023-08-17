@@ -7,7 +7,7 @@ from scrapy import signals
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
-
+from Task.settings import logging
 
 class TaskSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
@@ -26,6 +26,7 @@ class TaskSpiderMiddleware:
         # middleware and into the spider.
 
         # Should return None or raise an exception.
+        logging.info("Step-6 The Engine receives the Response from the Downloader and sends it to the Spider for processing, passing through the Spider Middleware (see process_spider_input()).")
         return None
 
     def process_spider_output(self, response, result, spider):
@@ -33,6 +34,7 @@ class TaskSpiderMiddleware:
         # it has processed the response.
 
         # Must return an iterable of Request, or item objects.
+        logging.info("Step-7 The Spider processes the Response and returns scraped items and new Requests (to follow) to the Engine, passing through the Spider Middleware (see process_spider_output()).")
         for i in result:
             yield i
 
@@ -78,6 +80,7 @@ class TaskDownloaderMiddleware:
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+        logging.info("Step-4 The Engine sends the Requests to the Downloader, passing through the Downloader Middlewares (see process_request()).")
         return None
 
     def process_response(self, request, response, spider):
@@ -87,6 +90,7 @@ class TaskDownloaderMiddleware:
         # - return a Response object
         # - return a Request object
         # - or raise IgnoreRequest
+        logging.info("Step-5 Once the page finishes downloading the Downloader generates a Response (with that page) and sends it to the Engine, passing through the Downloader Middlewares (see process_response()).")
         return response
 
     def process_exception(self, request, exception, spider):
@@ -100,4 +104,5 @@ class TaskDownloaderMiddleware:
         pass
 
     def spider_opened(self, spider):
+        logging.info(f"Step 3 {spider.name} request recieved from scheduler")
         spider.logger.info("Spider opened: %s" % spider.name)

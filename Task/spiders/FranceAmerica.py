@@ -5,11 +5,11 @@ from Task.spiders.Central import Central
 from Task.items import TaskItem
 from Task.settings import logging
 class FranceAmerica(Central):
-
+    logging.info("Step-1 done by engine spider opened")
     name="franceamerica"
 
     def parse(self,response):
-        logging.info("Step-V")
+        
         item=TaskItem()
         response.selector.remove_namespaces()
 

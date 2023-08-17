@@ -28,6 +28,7 @@ class MongoDBPipeline:
         pass
 
     def process_item(self, item, spider):
+        logging.info("Step-8 The Engine sends processed items to Item Pipelines, then send processed Requests to the Scheduler and asks for possible next Requests to crawl.")
         if isinstance(item,TaskItem):
             link        =   item['link']
             spider_fd   =   spider.name+"_fd"   
