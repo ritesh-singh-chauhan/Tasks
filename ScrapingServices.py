@@ -14,7 +14,6 @@ from Task.settings import REDIS_SETTINGS,logging
 
 obj = CentralSql()
 
-
 class ScrapingServices:
 
     def __init__(self):
@@ -57,5 +56,6 @@ class ScrapingServices:
 
         finally:
             self.session.close()
+
 obj_scraping=ScrapingServices()
 obj_scraping.UsingRedis()

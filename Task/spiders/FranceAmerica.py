@@ -3,13 +3,15 @@ import hashlib
 from w3lib.html import remove_tags
 from Task.spiders.Central import Central
 from Task.items import TaskItem
-from Task.settings import logging
+from Task.settings import logging,CUSTOM_CURRENT_TIME
+
 class FranceAmerica(Central):
-    logging.info("Step-1 done by engine spider opened")
+
+    logging.info(f"Step-1 done by engine spider opened: {CUSTOM_CURRENT_TIME}")
     name="franceamerica"
 
     def parse(self,response):
-        
+
         item=TaskItem()
         response.selector.remove_namespaces()
 

@@ -1,5 +1,4 @@
 import scrapy
-from Task.settings import logging
 
 class Central(scrapy.Spider):
 

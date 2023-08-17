@@ -4,9 +4,11 @@ from Task.items import FullDescription
 import hashlib
 from w3lib.html import remove_tags
 import html
-from Task.settings import logging
-class FranceAmerica_fd(Centralfd):
+from Task.settings import logging,CUSTOM_CURRENT_TIME
 
+class FranceAmerica_fd(Centralfd):
+    
+    logging.info(f"Step-1 done by engine spider opened: {CUSTOM_CURRENT_TIME}")
     name="franceamerica_fd"
 
     def parse(self,response):
