@@ -30,7 +30,6 @@ class ScrapingServices:
     
             for row in rows:
                 print(row)
-            
             redis_conn = Redis(
                 host    =   REDIS_SETTINGS["REDIS_HOST"], 
                 port    =   REDIS_SETTINGS["REDIS_PORT"], 
@@ -48,7 +47,7 @@ class ScrapingServices:
                 spidername,sourcelink,status= row[0], row[1], row[2]
                 if status == 1:
                     processObj=ProcessCrawler()
-                    print(q.enqueue(processObj.feeds, args=(spidername,sourcelink)))
+                    q.enqueue(processObj.feeds, args=(spidername,sourcelink))
                     
         except Exception as error:
             logging.error(f"Error found in ScrapingServices{error}")
