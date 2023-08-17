@@ -1,3 +1,8 @@
+from ProcessCrawler import *
+from redis import Redis
+from rq import Queue
+from CentralSql import CentralSql,Source,Domain
+from Task.settings import REDIS_SETTINGS,logging
 # import os
 # import sys
 # from pathlib import Path
@@ -6,12 +11,6 @@
 # print(sys.path)
 # sys.path.insert(0,str(processcrawler))
 # print(sys.path)
-from ProcessCrawler import *
-from redis import Redis
-from rq import Queue
-from CentralSql import CentralSql,Source,Domain
-from Task.settings import REDIS_SETTINGS,logging
-
 
 obj = CentralSql()
 
@@ -60,6 +59,3 @@ class ScrapingServices:
             self.session.close()
 obj_scraping=ScrapingServices()
 obj_scraping.UsingRedis()
-
-
-

@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from os import getenv
 import logging
 
-logging.basicConfig(filename="./Mylog.log",level=logging.DEBUG)
+logging.basicConfig(filename="./Mylog.log",level=logging.INFO)
 load_dotenv('.env')
 
 DB_SETTINGS = {
