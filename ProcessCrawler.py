@@ -11,11 +11,12 @@ class ProcessCrawler:
         self.process.start()
     
     def feed_fd(self,spider_fd,url):
+        self.spider_fd=spider_fd
         self.url    =   url
 
         try:
             process =   CrawlerProcess(get_project_settings())
-            process.crawl(spider_fd,self.url)
+            process.crawl(self.spider_fd,self.url)
             process.start()
 
         except Exception as error:

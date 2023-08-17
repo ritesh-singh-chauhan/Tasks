@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from os import getenv
 import logging
 
-logging.basicConfig(filename="/home/ritesh/projects/testprojects/ScrapyLocalHost/Task/Mylog.log",level=logging.INFO)
+logging.basicConfig(filename="./Mylog.log",level=logging.INFO)
 load_dotenv('.env')
 DB_SETTINGS = {
     "DATABASE"  :   getenv("DATABASE","Spider_data"),
